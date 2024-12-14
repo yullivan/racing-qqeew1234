@@ -13,49 +13,43 @@ public class Application {
     static Scanner scanner = new Scanner(System.in);
     static Random random = new Random();
 
-    public static void main(String[] args) {
-        System.out.print("이름을 입력해 주세요: ");
-        String 이름들 = scanner.nextLine();
-        List<String> 이름목록 = List.of(이름들.split(","));
+    public static void main(Car[] args) {
 
-//        Car xxxx = new Car(0, ?????);
-//        xxxx.이동횟수 = 7;
+        ArrayList<Car> 차량이름목록 = new ArrayList<>();
 
-        // List<String> -> List<Car> 새로 만들어 내기
-//        new Car(0, 이름목록.get(0));
-//        new Car(0, 이름목록.get(1));
-//        new Car(0, 이름목록.get(2));
-        ;
-        List<Car> cars = new ArrayList<>();
-        cars.add(new Car(1,"좋은차"));
+        // 3번 반복 받는 부분,
+        for (int i = 0; i < 3; i++) {
+            System.out.print("차량 이름을 입력해 주세요: ");
+            String 차이름 = scanner.nextLine();
 
+            //10자초과 오류출력
+            if (차이름.length()>10){
+                throw new IllegalArgumentException("10글자이상 불가");
+            }
 
-
-        System.out.print("횟수를 입력해 주세요: ");
-        int 횟수 = Integer.parseInt(scanner.nextLine());
-
-        // 랜덤값이 3이상이면 전진, 아니면 정지
-        int 전진횟수 = 0;
-
-        전진횟수 = 전진(전진횟수);
-        System.out.println("전진횟수 = " + 전진횟수);
-        전진횟수 = 전진(전진횟수);
-        System.out.println("전진횟수 = " + 전진횟수);
-        전진횟수 = 전진(전진횟수);
-        System.out.println("전진횟수 = " + 전진횟수);
-        전진횟수 = 전진(전진횟수);
-        System.out.println("전진횟수 = " + 전진횟수);
-        전진횟수 = 전진(전진횟수);
-        System.out.println("전진횟수 = " + 전진횟수);
-
-    }
-
-    static int 전진(int 함수내부에서사용하는_전진횟수) {
-        int 주사위값 = random.nextInt(6) + 1;
-        if (주사위값 >= 3) {
-            return 함수내부에서사용하는_전진횟수 + 1;
+            차량이름목록.add(new Car(차이름));
         }
-        return 함수내부에서사용하는_전진횟수;
+
+
+        //주사위 굴릴 횟수 입력
+        System.out.println("횟수를 입력해 주세요: ");
+        int count = Integer.parseInt(scanner.nextLine());
+
+        DiceGame game = new DiceGame();
+        for (int i = 0; i < count; i++) {
+            game.play(count);
+
+            //자사위에 따라 이동
+            for (Car.차이름)
+
+        }
+
+
+
     }
+
+
+
+
 
 }
