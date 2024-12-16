@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static racing.Car.winCars;
 
 public class Application {
 
@@ -20,40 +19,32 @@ public class Application {
         int 이동예정횟수 = 10;
 
         List<String> 차량이름목록 = 차량리스트입력();
-        toCars(차량이름목록) = 차량리스트입력();
-
-
-
+//        toCars(차량이름목록) = 차량리스트입력(); ERROR!
 
 
 //        List<Car> 차량이동횟수 = List.of(new Car(0, "현대"), new Car(0, "테슬라"), new Car(0, "포르쉐"));
-
-        Car 자동차A = 차량이동횟수.get(0);
-        Car 자동차B = 차량이동횟수.get(1);
-        Car 자동차C = 차량이동횟수.get(2);
-        for (int i = 0; i < 이동예정횟수; i++) {
-            자동차A.전진();
-            System.out.println("A이동횟수 = " + 자동차A.이동횟수);
-
-
-            자동차B.전진();
-            System.out.println("B이동횟수 = " + 자동차B.이동횟수);
-
-
-            자동차C.전진();
-            System.out.println("C이동횟수 = " + 자동차C.이동횟수);
-
-
+//        Car 자동차A = cars.get(0);
+//        Car 자동차B = cars.get(1);
+//        Car 자동차C = cars.get(2);
+        List<Car> cars = toCars(차량이름목록);
+        for (int i = 0; i < 차량이름목록.size(); i++) {
+            Car 자동차 = cars.get(i);
+            자동차.전진();
         }
+        System.out.println(cars);
 
-        List<Car> 이동횟수목록 = winCars(차량이동횟수);
-        System.out.println("우승자 = "+이동횟수목록);
+        List<Car> 우승자목록 = winCars(cars);
+        System.out.println("우승자 = " + 우승자목록);
 
     }
 
-    private static List<String> toCars(List<Car> 차량이름목록) {
-        List<String> 차량이름목록 = 차량리스트입력();
-        List<Car> 차량목록 = toCars(차량이름목록);
+    private static List<Car> toCars(List<String> 이름목록) {
+        ArrayList<Car> objects = new ArrayList<>();
+        for (int i = 0; i < 이름목록.size(); i++) {
+            String 이름 = 이름목록.get(i);
+            objects.add(new Car(이름));
+        }
+        return objects;
     }
 
     private static List<String> 차량리스트입력() {
@@ -67,9 +58,21 @@ public class Application {
         return 이름리스트;
     }
 
+    static List<Car> winCars(List<Car> 자동차목록) {
+        List<Integer> 이동횟수목록 = 자동차목록.stream()
+                .map(car -> car.이동횟수)
+                .toList();
 
+        int 최대이동 = Collections.max(이동횟수목록);
 
+        ArrayList<Car> 우승자목록 = new ArrayList<>();
+        for (int i = 0; i < 자동차목록.size(); i++) {
+            Car 자동차 = 자동차목록.get(i);
+            if (자동차.이동횟수 == 최대이동) {
+                우승자목록.add(자동차);
+            }
+        }
 
-
-
+        return 자동차목록;
+    }
 }
