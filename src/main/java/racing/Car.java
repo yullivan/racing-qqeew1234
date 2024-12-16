@@ -18,6 +18,7 @@ public class Car {
 
     public Car(String 차량이름) {
         this.차량이름 = 차량이름;
+        this.이동횟수 = 0;
     }
 
 
@@ -50,7 +51,7 @@ public class Car {
         return Objects.hash(차량이름, 이동횟수);
     }
 
-    public Car(int 이동횟수, String 차량이름) {
+    public Car(String 차량이름, int 이동횟수) {
         this.이동횟수 = 이동횟수;
         this.차량이름 = 차량이름;
     }
